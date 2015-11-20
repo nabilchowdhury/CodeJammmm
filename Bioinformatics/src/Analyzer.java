@@ -30,7 +30,7 @@ public class Analyzer {
 			scanner.close();
 			
 			System.out.println(patients.get(1).properties[0].propertyValue);
-			
+			System.out.println(patients.size());
 			//sets remissions & resistant patients
 			setRemissions();
 			setResistant();
@@ -47,7 +47,7 @@ public class Analyzer {
 	//SETS ARRAYLIST "REMISSIONS"
 	public static void setRemissions(){
 		for(int i=1; i<patients.size(); i++){
-			if(patients.get(i).properties[266].equals("COMPLETE_REMISSION")){
+			if(patients.get(i).properties[266].propertyValue.equals("COMPLETE_REMISSION")){
 				remissions.add(patients.get(i));
 			}
 		}
@@ -56,7 +56,7 @@ public class Analyzer {
 	//SETS ARRAYLIST "RESISTANT'
 	public static void setResistant(){
 		for(int i=1; i<patients.size(); i++){
-			if(patients.get(i).properties[266].equals("RESISTANT")){
+			if(patients.get(i).properties[266].propertyValue.equals("RESISTANT")){
 				resistant.add(patients.get(i));
 			}
 		}
@@ -67,14 +67,14 @@ public class Analyzer {
 		int rem = 0;
 		int res = 0;
 		for(int i = 0; i<remissions.size(); i++){
-			if(remissions.get(i).properties[column].equals(comparator)) {
+			if(remissions.get(i).properties[column].propertyValue.equals(comparator)) { 
 				rem++;
 			}
 		}
 			System.out.println("");
 			
 		for(int i = 0; i<resistant.size(); i++){
-			if(resistant.get(i).properties[column].equals(comparator)) {
+			if(resistant.get(i).properties[column].propertyValue.equals(comparator)) { 
 				res++;
 			}
 		}
@@ -85,10 +85,10 @@ public class Analyzer {
 	//EDIT: DETERMINES UNIQUE VALUES OF A PROPERTY AND STORES IT IN AN ARRAY TO CALCULATE AVG
 	public ArrayList<String> PropertyElements(int property) {
 		ArrayList<String> result = new ArrayList<String>();	
-		for(int i=0; i<166; i++){
+		for(int i=0; i<patients.size(); i++){
 			for(int j=0; j<result.size(); j++){
-				if(!patients.get(i).properties[property].equals(patients.get(j).properties[property]))
-						result.add(patients.get(i).properties[property].propertyValue); //TODO check if correct
+				if(!patients.get(i).properties[property].propertyValue.equals(patients.get(j).properties[property].propertyValue)) 
+						result.add(patients.get(i).properties[property].propertyValue); 
 			}
 		}
 		return result;
@@ -99,10 +99,10 @@ public class Analyzer {
 		int patients = p.size();
 		double sum = 0;
 		for(int i=0; i<p.size(); i++){
-			if(p.get(i).properties[column].equals("NA")){
+			if(p.get(i).properties[column].propertyValue.equals("NA")){ 
 				patients--;
 			}else{
-				sum += Double.valueOf(p.get(i).properties[column].propertyValue); //TODO check if this correct
+				sum += Double.valueOf(p.get(i).properties[column].propertyValue); 
 			}
 		}
 		
@@ -116,10 +116,10 @@ public class Analyzer {
 		double variance = 0;
 		int patients = p.size();
 		for(int i=0; i<p.size(); i++){
-			if(p.get(i).properties[column].equals("NA")){
+			if(p.get(i).properties[column].propertyValue.equals("NA")){
 				patients--;
 			}else{
-				double difference = Double.valueOf(p.get(i).properties[column])-average; //TODO change this
+				double difference = Double.valueOf(p.get(i).properties[column].propertyValue)-average; 
 				variance += difference*difference;
 			}
 		}
@@ -131,10 +131,11 @@ public class Analyzer {
 		return std;
 	}
 	
+	//Just ignore for now.
 	public static void createNumbsArray(ArrayList<Patient> L, int property) {
 		for(int i = 0; i < L.get(1).properties.length; i++)
 		{
-			String blah = L.get(1).properties[i]; //TODO: change this
+			String blah = L.get(1).properties[i].propertyValue; 
 			if(blah.contains("0") || blah.contains("1") || blah.contains("2")|| blah.contains("3") || blah.contains("4") || blah.contains("5") || blah.contains("6") || blah.contains("7")|| blah.contains("8") || blah.contains("9"))
 			{
 				for(int j = 1; j < L.size(); j++)
