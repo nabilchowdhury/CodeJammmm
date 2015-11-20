@@ -1,9 +1,9 @@
 
 public class Patient {
-	public String[] properties;
+	public Property[] properties;
 	
-	public Patient(String s){	
-		properties = s.split("	");
+	public Patient(Property[] s){	
+		properties = s;
 	}
 	
 }

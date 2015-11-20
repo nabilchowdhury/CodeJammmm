@@ -13,6 +13,25 @@ public class Analyzer {
 	
 	public static void main(String[] arg){
 		try{
+			patients.add(new Patient())
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			//-----------------
 			patients.add(new Patient("dummy"));
 			File file = new File("trainingData.txt");
 			Scanner scanner = new Scanner(file);
