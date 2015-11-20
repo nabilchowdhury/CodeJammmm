@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 public class PropertyImport {
 	public String[] properties;
-	public Property[] finalprops = new Property[266];
+	public Property[] finalprops = new Property[269];
 	
 	public PropertyImport(String s){	
 		properties = s.split("	");
