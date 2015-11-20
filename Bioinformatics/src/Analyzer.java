@@ -6,9 +6,10 @@ import java.util.Scanner;
 
 public class Analyzer {
 	
-	static ArrayList<Patient> patients = new ArrayList<Patient>();
-	static ArrayList<Patient> remissions = new ArrayList<Patient>();
-	static ArrayList<Patient> resistant = new ArrayList<Patient>();
+	static ArrayList<Patient> patients     = new ArrayList<Patient>();
+	static ArrayList<Patient> remissions   = new ArrayList<Patient>();
+	static ArrayList<Patient> sortedRemAvg = new ArrayList<Patient>();
+	static ArrayList<Patient> resistant    = new ArrayList<Patient>();
 	
 	public static void main(String[] arg){
 		try{
@@ -25,15 +26,24 @@ public class Analyzer {
 			scanner.close();
 			
 			//sets remissions & resistant patients
+			setPatients();
 			setRemissions();
 			setResistant();
 	
 			//remove print statement after test
 			System.out.println(calculateSTD(15, calculateAverageInt(15, remissions), remissions));
+			System.out.println(patients.get(133).pos);
 			
 			
 		}catch(Exception e){
 			System.out.println(e);
+		}
+	}
+	
+	public static void setPatients(){
+		for(int i = 1; i<patients.size(); i++)
+		{
+			patients.get(i).pos = i;
 		}
 	}
 	
