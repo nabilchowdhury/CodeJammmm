@@ -8,8 +8,8 @@ import java.util.regex.*;
 
 public class Solution {
 	//model data
-	public static ArrayList<Average> remAverage;
-	public static ArrayList<Average> resistAverage;
+	public static ArrayList<Average> remAverage = new ArrayList<Average>();
+	public static ArrayList<Average> resistAverage = new ArrayList<Average>();
 	
 	public static ArrayList<Patient> patients = new ArrayList<Patient>();
 		
