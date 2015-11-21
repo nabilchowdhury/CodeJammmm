@@ -2,7 +2,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-//there is an error with parsing the txt file (will explain tomorrow).
+//Indices 1,4,5,6,7,8,9,10,11,
 
 public class Analyzer {
 	
@@ -24,12 +24,11 @@ public class Analyzer {
 			}
 			scanner.close();
 			
-			//sets remissions & resistant patients
+			//sets remissions & resistants
 			setRemissions();
 			setResistant();
 	
-			//remove print statement after test
-			System.out.println(calculateSTD(15, calculateAverageInt(15, remissions), remissions));
+			System.out.println(calculateSTD(2, calculateAverageInt(2, remissions), remissions));
 			
 			
 		}catch(Exception e){
@@ -37,7 +36,7 @@ public class Analyzer {
 		}
 	}
 	
-	//SETS ARRAYLIST "REMISSIONS"
+	//sets remissions
 	public static void setRemissions(){
 		for(int i=1; i<patients.size(); i++){
 			if(patients.get(i).properties[266].equals("COMPLETE_REMISSION")){
@@ -46,7 +45,7 @@ public class Analyzer {
 		}
 	}
 	
-	//SETS ARRAYLIST "RESISTANT'
+	//sets resistants
 	public static void setResistant(){
 		for(int i=1; i<patients.size(); i++){
 			if(patients.get(i).properties[266].equals("RESISTANT")){
@@ -55,7 +54,7 @@ public class Analyzer {
 		}
 	}
 	
-	//EDIT: FINDS AVG OF BINARY PROPERTIES. EDIT TO INCLUDE MORE INPUTS (USE METHOD "PROPERTYELEMENTS")
+	//finds avg of binary propertiers //edit
 	public void yesNo(int column, String comparator) {
 		int rem = 0;
 		int res = 0;
@@ -75,7 +74,7 @@ public class Analyzer {
 		System.out.println("Non Remission: number of" + comparator + res + "/" + resistant.size());
 	}
 	
-	//EDIT: DETERMINES UNIQUE VALUES OF A PROPERTY AND STORES IT IN AN ARRAY TO CALCULATE AVG
+	//Determines the unique values of a property element stores in  //edit
 	public ArrayList<String> PropertyElements(int property) {
 		ArrayList<String> result = new ArrayList<String>();	
 		for(int i=0; i<166; i++){
@@ -87,7 +86,7 @@ public class Analyzer {
 		return result;
 	}
 	
-	//CALCULATES AVERAGE OF INT TABLE DATA
+	//calculateaverageint
 	public static double calculateAverageInt(int column, ArrayList<Patient> p){
 		int patients = p.size();
 		double sum = 0;
@@ -104,7 +103,7 @@ public class Analyzer {
 		return average;
 	}
 	
-	//CALCULATES STANDARD DEVIATION OF INT TABLE DATA
+	//calculates standard deviation
 	public static double calculateSTD(int column, double average, ArrayList<Patient> p){
 		double variance = 0;
 		int patients = p.size();
@@ -119,7 +118,7 @@ public class Analyzer {
 		
 		variance = variance/patients;
 		
-		double std = Math.sqrt(variance);	
+		double std = Math.sqrt(variance);
 		
 		return std;
 	}
