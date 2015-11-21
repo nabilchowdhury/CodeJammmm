@@ -52,24 +52,24 @@ public class Analyzer {
 	
 			setAverage();
 			setSTD();
-			
+
+			/*
 			//PLOT FREQUENCIES REMISSIONS
 			int column = 1;
-			while(column < patients.get(1).properties.length){
-				if(!(column == 0 || column == 1 || column == 4 || column == 5 || column == 6 || column == 7 || column == 8 || column == 9 || column == 10 || column == 11 || column == 266)){
-					plotFrequencies(column, remissions);
-				}
-				column++;
+			System.out.println("REMISSIONS, COLUMN: " + column +"\n");
+			if(!(column == 0 || column == 1 || column == 4 || column == 5 || column == 6 || column == 7 || column == 8 || column == 9 || column == 10 || column == 11 || column == 266)){
+				plotFrequencies(column, remissions);
 			}
+
+			*/
+			
 			//PLOT FREQUENCIES NON REMISSIONS
-			System.out.println("******************************************\n ");
-			int column1 = 1;
-			while(column1 < patients.get(1).properties.length){
-				if(!(column1 == 0 || column1 == 1 || column1 == 4 || column1 == 5 || column1 == 6 || column1 == 7 || column1 == 8 || column1 == 9 || column1 == 10 || column1 == 11 || column1 == 266)){
-					plotFrequencies(column1, resistant);
+			System.out.println("****************************************** ");
+			int column = 2;
+			System.out.println("RESISTANT, COLUMN: " + column +"\n");
+				if(!(column == 0 || column == 1 || column == 4 || column == 5 || column == 6 || column == 7 || column == 8 || column == 9 || column == 10 || column == 11 || column == 266)){
+					plotFrequencies(column, resistant);
 				}
-				column1++;
-			}
 			
 			
 		} catch(FileNotFoundException e) {
@@ -115,7 +115,7 @@ public class Analyzer {
 			else if(value > rangemax)
 			{
 				rangemax +=average/100;
-				System.out.println(rangemax + "\t" + freq);
+				if(freq != 0) {System.out.println(rangemax + "\t" + freq);}
 				freq = 0;
 				i--;
 			}
