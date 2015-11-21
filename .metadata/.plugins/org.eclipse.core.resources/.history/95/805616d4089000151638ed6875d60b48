@@ -52,7 +52,7 @@ public class Analyzer {
 		}
 	}
 	
-	//finds avg of binary propertiers //edit
+	//finds avg of binary propertiers
 	public void yesNo(int column, String comparator) {
 		int rem = 0;
 		int res = 0;

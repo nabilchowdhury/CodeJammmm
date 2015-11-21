@@ -52,21 +52,5 @@ public class Analyzer {
 		}
 	}
 	
-	//finds avg of binary propertiers //edit
-	public void yesNo(int column, String comparator) {
-		int rem = 0;
-		int res = 0;
-		for(int i = 0; i<remissions.size(); i++){
-			if(remissions.get(i).properties[column].equals(comparator)) {rem++;}
-		}
-			System.out.println("");
-			
-		for(int i = 0; i<resistant.size(); i++){
-			if(resistant.get(i).properties[column].equals(comparator)) {res++;}
-		}
-		System.out.println("Remission: number of" + comparator + rem + "/" + remissions.size());
-		System.out.println("Non Remission: number of" + comparator + res + "/" + resistant.size());
-	}
-	
 	
 }
