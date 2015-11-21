@@ -54,11 +54,6 @@ public class Analyzer {
 			setAverage();
 			setSTD();
 			
-			//hardcode
-			//add for loop
-			PrintWriter pw = new PrintWriter("insertfile.txt");
-			pw.println("insert form of output here");
-			
 		} catch(FileNotFoundException e) {
 			e.printStackTrace();
 		}

@@ -1,7 +1,5 @@
 package algorithm;
 
-
-
 import java.io.*;
 import java.util.*;
 import java.text.*;
@@ -45,21 +43,25 @@ public class Solution {
     	int remissionChance = 0;
     	int rejectionChance = 0;
 	    for(int i=1; i<patients.size(); i++){
-	    	for(int j=1; i<remAverage.size(); j++){
+	    	for(int j=1; j<256; j++){
 	    		if(!(j == 0 ||j == 1 ||j == 4 ||j == 5 ||j == 6 ||j == 7 ||j == 8 ||j == 9 ||j == 10 ||j == 11)){
-		    		Double remChance = Double.valueOf(patients.get(i).properties[j].propertyValue)-remAverage.get(j).average;
-		    		Double resistChance = Double.valueOf(patients.get(i).properties[j].propertyValue)-resistAverage.get(j).average;
-		    		if(remChance > resistChance){
-		    			remissionChance++;
-		    		}else{
-		    			rejectionChance++;
-		    		}
+	    			if(!patients.get(i).properties[j].propertyValue.equals("NA") && !patients.get(i).properties[j].propertyValue.equals(""))
+	    			{
+			    		Double remChance = Math.abs(Double.valueOf(patients.get(i).properties[j].propertyValue)-remAverage.get(j).average);
+			    		Double resistChance = Math.abs(Double.valueOf(patients.get(i).properties[j].propertyValue)-resistAverage.get(j).average);
+			    		if(remChance > resistChance){
+			    			remissionChance++;
+			    		}else{
+			    			rejectionChance++;
+			    		}
+	    			}
 	    		}
 	    	}
+            rejectionChance *= 0.85;
 	    	if(remissionChance>rejectionChance){
-	    		System.out.println(patients.get(i).properties[0]+" COMPLETE_REMISSION"+" 0"+" 0");
+	    		System.out.println(patients.get(i).properties[0].propertyValue+" COMPLETE_REMISSION"+" 0"+" 0");
 	    	}else{
-	    		System.out.println(patients.get(i).properties[0]+" RESISTANT"+" 0"+" 0");
+	    		System.out.println(patients.get(i).properties[0].propertyValue+" RESISTANT"+" 0"+" 0");
 	    	}
 	    	remissionChance = 0;
 	    	rejectionChance = 0;
