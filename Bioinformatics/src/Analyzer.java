@@ -53,14 +53,24 @@ public class Analyzer {
 			setAverage();
 			setSTD();
 			
-			//PLOT FREQUENCIES
+			//PLOT FREQUENCIES REMISSIONS
 			int column = 1;
 			while(column < patients.get(1).properties.length){
 				if(!(column == 0 || column == 1 || column == 4 || column == 5 || column == 6 || column == 7 || column == 8 || column == 9 || column == 10 || column == 11 || column == 266)){
-					plotFrequencies(column);
+					plotFrequencies(column, remissions);
 				}
 				column++;
 			}
+			//PLOT FREQUENCIES NON REMISSIONS
+			System.out.println("******************************************\n ");
+			int column1 = 1;
+			while(column1 < patients.get(1).properties.length){
+				if(!(column1 == 0 || column1 == 1 || column1 == 4 || column1 == 5 || column1 == 6 || column1 == 7 || column1 == 8 || column1 == 9 || column1 == 10 || column1 == 11 || column1 == 266)){
+					plotFrequencies(column1, resistant);
+				}
+				column1++;
+			}
+			
 			
 		} catch(FileNotFoundException e) {
 			e.printStackTrace();
@@ -87,28 +97,27 @@ public class Analyzer {
 
 	}
 	//PLOTS FREQUENCIES
-	public static void plotFrequencies(int column) {
-		ArrayList<Property> properties = sortPatient(patients, column);
-		Average a = new Average(calculateAverageInt2(column, patients), column);
+	public static void plotFrequencies(int column, ArrayList<Patient> p) {
+		ArrayList<Property> properties = sortPatient(p, column);
+		Average a = new Average(calculateAverageInt(column, p), column);
 		double average = a.average;
 		double rangemax = average/100;
 		int freq = 0;
-		Boolean wasChanged = false;
 		
 		
-		for(int i = 0; i < patients.size(); i++)
+		for(int i = 0; i < p.size(); i++)
 		{
 			double value = Double.valueOf(properties.get(i).propertyValue); 
 			if(value < rangemax)
 			{
 				freq++;
-				wasChanged = true;
 			}
-			if(!wasChanged)
+			else if(value > rangemax)
 			{
-				rangemax += average/100;
+				rangemax +=average/100;
 				System.out.println(rangemax + "\t" + freq);
 				freq = 0;
+				i--;
 			}
 		}
 	}
