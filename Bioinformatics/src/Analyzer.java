@@ -53,6 +53,30 @@ public class Analyzer {
 			
 			setAverage();
 			setSTD();
+			/*
+			//hardcoding
+			PrintWriter pw = new PrintWriter("resistavg.txt");
+			int index = 0;
+			while(index < remissions.get(1).properties.length){
+				Double average = calculateAverageInt(index, remissions);
+				pw.println("resistAverage.add(new Average("+resistAverage.get(index).average+","+resistAverage.get(index).index+"));");
+				index++;
+			}
+			pw.close();
+			*/
+			
+			System.out.println(remAverage.size());
+			//hardcoding
+			int index = 0;
+			while(index < remissions.get(1).properties.length-3){
+				if(index != 0 && index != 1 && index != 4 && index != 5 && index != 6 && index != 7 && index != 8 && index != 9 && index != 10 && index != 11)
+				{
+					Double AvgCol = calculateAverageInt(index, remissions);
+					Double stdDev = remSTD.get(index).standarddev.doubleValue();
+					System.out.println("dataRem.add(new data(" + index + "," + AvgCol + "," + stdDev + "));");
+				}
+				index++;
+			}
 			
 		} catch(FileNotFoundException e) {
 			e.printStackTrace();
@@ -187,12 +211,21 @@ public class Analyzer {
 				remAverage.add(new Average(calculateAverageInt(column, remissions), column));
 				resistAverage.add(new Average(calculateAverageInt(column, resistant), column));
 			}
+			else if(column == 0 || column == 1 || column == 4 || column == 5 || column == 6 || column == 7 || column == 8 || column == 9 || column == 10 || column == 11 || column == 266)
+			{
+				remAverage.add(new Average(-99, column));
+				resistAverage.add(new Average(-99, column));
+			}
 			column++;
 		}
 	}
 	
 	//CALCULATES STANDARD DEVIATION OF INT TABLE DATA
 	public static double calculateSTD(int column, double average, ArrayList<Patient> p){
+		if((column == 0 || column == 1 || column == 4 || column == 5 || column == 6 || column == 7 || column == 8 || column == 9 || column == 10 || column == 11 || column == 266))
+		{
+			return -99;
+		}
 		double variance = 0;
 		int patients = p.size();
 		for(int i=0; i<p.size(); i++){
