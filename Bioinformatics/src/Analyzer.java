@@ -115,7 +115,7 @@ public class Analyzer {
 			else if(value > rangemax)
 			{
 				rangemax +=average/100;
-				if(freq != 0) {System.out.println(rangemax + "\t" + freq);}
+				{System.out.println(rangemax + "\t" + freq);}
 				freq = 0;
 				i--;
 			}
