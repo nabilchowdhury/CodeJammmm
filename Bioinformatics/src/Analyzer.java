@@ -89,7 +89,7 @@ public class Analyzer {
 	//PLOTS FREQUENCIES
 	public static void plotFrequencies(int column) {
 		ArrayList<Property> properties = sortPatient(patients, column);
-		Average a = new Average(calculateAverageInt(column, patients), column);
+		Average a = new Average(calculateAverageInt2(column, patients), column);
 		double average = a.average;
 		double rangemax = average/100;
 		int freq = 0;
@@ -206,6 +206,21 @@ public class Analyzer {
 		return average;
 	}
 	
+	public static double calculateAverageInt2(int column, ArrayList<Patient> p){
+		int patients = p.size() - 1;
+		double sum = 0;
+		for(int i=1; i<p.size(); i++){
+			if(p.get(i).properties[column].propertyValue.equals("NA")){ 
+				patients--;
+			}else{
+				sum += Double.valueOf(p.get(i).properties[column].propertyValue); 
+			}
+		}
+		
+		double average = sum/patients;
+		
+		return average;
+	}
 	
 	//SETS AVERAGE OF REMISSIONS AND RESISTANTS (INT DATA ONLY)
 	public static void setAverage(){
