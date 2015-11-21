@@ -22,8 +22,8 @@ public class Analyzer {
 	static ArrayList<Average> resistAverage = new ArrayList<Average>();
 	
 	//patient standard deviations
-	/*static ArrayList<STD> remSTD = new ArrayList<Patient>();
-	static ArrayList<STD> resistSTD = new ArrayList<Patient>();*/
+	static ArrayList<STD> remSTD = new ArrayList<Patient>();
+	static ArrayList<STD> resistSTD = new ArrayList<Patient>();
 	
 	
 	
@@ -48,11 +48,8 @@ public class Analyzer {
 			setRemissions();
 			setResistant();
 	
-			setAverage();
 			
-			for(int i=0; i<resistAverage.size(); i++){
-				System.out.println(resistAverage.get(i).average+" , column:"+resistAverage.get(i).index);
-			}
+		System.out.println((remissions.size()+resistant.size()) == patients.size());
 			
 		}catch(FileNotFoundException e){
 			e.printStackTrace();
@@ -77,16 +74,8 @@ public class Analyzer {
 		}
 	}
 	
-	//Calculates binary average
-	public static void calculateBinaryAverage(int column){
-		ArrayList<String> uniqueValues = PropertyElements(column);
-		for(int i=0; i<uniqueValues.size(); i++){
-			yesNo(column, uniqueValues.get(i));
-		}
-			
-	}
-	//FINDS AVG OF BINARY PROPERTIES. EDIT TO INCLUDE MORE INPUTS (USE METHOD "PROPERTYELEMENTS")
-	public static void yesNo(int column, String comparator) {
+	//EDIT: FINDS AVG OF BINARY PROPERTIES. EDIT TO INCLUDE MORE INPUTS (USE METHOD "PROPERTYELEMENTS")
+	public void yesNo(int column, String comparator) {
 		int rem = 0;
 		int res = 0;
 		for(int i = 0; i<remissions.size(); i++){
@@ -101,28 +90,22 @@ public class Analyzer {
 				res++;
 			}
 		}
-		System.out.println("Remission: number of " + comparator + " " + rem + "/" + remissions.size());
-		System.out.println("Non Remission: number of " + comparator + " " + res + "/" + resistant.size());
+		System.out.println("Remission: number of" + comparator + rem + "/" + remissions.size());
+		System.out.println("Non Remission: number of" + comparator + res + "/" + resistant.size());
 	}
 	
 	//EDIT: DETERMINES UNIQUE VALUES OF A PROPERTY AND STORES IT IN AN ARRAY TO CALCULATE AVG
-	public static ArrayList<String> PropertyElements(int column) {
-			
-		ArrayList<String> result = new ArrayList<String>();
-		result.add(patients.get(1).properties[column].propertyValue);
-			
-		for(int i=1; i<patients.size();i++) {
-			String value = patients.get(i).properties[column].propertyValue;
-			int duplicates = 0;
-			for(int j = 0; j<result.size(); j++){
-				if(value.equals(result.get(j)))
-					duplicates++;
-				}
-			if(duplicates==0)
-				result.add(value);
-			}	
+	public ArrayList<String> PropertyElements(int property) {
+		ArrayList<String> result = new ArrayList<String>();	
+		for(int i=0; i<patients.size(); i++){
+			for(int j=0; j<result.size(); j++){
+				if(!patients.get(i).properties[property].propertyValue.equals(patients.get(j).properties[property].propertyValue)) 
+						result.add(patients.get(i).properties[property].propertyValue); 
+			}
+		}
 		return result;
 	}
+	
 	//CALCULATES AVERAGE OF INT TABLE DATA
 	public static double calculateAverageInt(int column, ArrayList<Patient> p){
 		int patients = p.size();
@@ -140,15 +123,16 @@ public class Analyzer {
 		return average;
 	}
 	
-	//SETS AVERAGE OF REMISSIONS AND RESISTANTS (INT DATA ONLY)
+	//SETS AVERAGE
 	public static void setAverage(){
 		int column = 0;
-		while(column < patients.get(1).properties.length){
-			if(!(column == 0 || column == 1 || column == 4 || column == 5 || column == 6 || column == 7 || column == 8 || column == 9 || column == 10 || column == 11 || column == 266)){
-				remAverage.add(new Average(calculateAverageInt(column, remissions), column));
-				resistAverage.add(new Average(calculateAverageInt(column, resistant), column));
+		while(column < patients.get(0).properties.length){
+			if(column == 0 || column == 1 || column == 4 || column == 5 || column == 6 || column == 7 || column == 8 || column == 9 || column == 10 || column == 11){
+				column++;
+			}else{
+				remAverage.add(new Average(calculateAverageInt(column, remissions)));
+				resistAverage.add(new Average(calculateAverageInt(column, remissions)));
 			}
-			column++;
 		}
 	}
 	
