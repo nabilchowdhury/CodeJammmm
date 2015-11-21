@@ -6,7 +6,6 @@ public class Analyzer {
 	
 	static ArrayList<Patient> patients = new ArrayList<Patient>();
 	static ArrayList<Patient> remissions = new ArrayList<Patient>();
-	static ArrayList<Patient> resistant = new ArrayList<Patient>();
 	
 	public static void main(String[] arg){
 		try{
@@ -23,31 +22,18 @@ public class Analyzer {
 			scanner.close();
 			
 			//sets remissions
-			for(int i=1; i<patients.size(); i++){
-				if(patients.get(i).properties[266].equals("COMPLETE_REMISSION")){
+			for(int i=0; i<patients.size(); i++){
+				String s = "COMPLETE_REMISSION";
+				if(patients.get(i).properties[266].trim().equals(s)){
 					remissions.add(patients.get(i));
 				}
 			}
+			System.out.println(remissions.get(0).properties);
 			
-			for(int i=1; i<patients.size(); i++){
-				if(patients.get(i).properties[266].equals("RESISTANT")){
-					resistant.add(patients.get(i));
-				}
-			}
-			
-			for(int i = 0; i<remissions.size(); i++){
-				System.out.println(remissions.get(i).properties[266]);
-			}
-			
-			for(int i = 0; i<resistant.size(); i++){
-				System.out.println(resistant.get(i).properties[266]);
-			}
-			
-			System.out.println(remissions.size() + resistant.size());
 			
 			
 		}catch(Exception e){
-			System.out.println(e);
+			
 		}
 	}
 	

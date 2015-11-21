@@ -39,12 +39,6 @@ public class Analyzer {
 				System.out.println(remissions.get(i).properties[266]);
 			}
 			
-			for(int i = 0; i<resistant.size(); i++){
-				System.out.println(resistant.get(i).properties[266]);
-			}
-			
-			System.out.println(remissions.size() + resistant.size());
-			
 			
 		}catch(Exception e){
 			System.out.println(e);

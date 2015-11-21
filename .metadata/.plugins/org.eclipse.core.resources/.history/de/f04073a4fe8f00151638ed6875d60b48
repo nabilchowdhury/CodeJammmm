@@ -1,0 +1,42 @@
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class Analyzer {
+	
+	static ArrayList<Patient> patients = new ArrayList<Patient>();
+	static ArrayList<Patient> remissions = new ArrayList<Patient>();
+	
+	public static void main(String[] arg){
+		try{
+			patients.add(new Patient("dummy"));
+			File file = new File("trainingData.txt");
+			Scanner scanner = new Scanner(file);
+			
+			String line = scanner.nextLine();
+			
+			while(scanner.hasNext()){
+				line = scanner.nextLine();
+				patients.add(new Patient(line));
+			}
+			scanner.close();
+			
+			//sets remissions
+			for(int i=0; i<patients.size(); i++){
+				String s = "COMPLETE_REMISSION";
+				if(patients.get(i).properties[266].trim().equals(s)){
+					Patient p = patients.get(i);
+					remissions.add(p);
+				}
+			}
+			System.out.println(remissions.get(0).properties[266]);
+			
+			
+			
+		}catch(Exception e){
+			
+		}
+	}
+	
+	
+}
