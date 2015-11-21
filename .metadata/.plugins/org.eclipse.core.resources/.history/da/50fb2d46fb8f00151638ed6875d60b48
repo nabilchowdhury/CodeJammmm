@@ -1,0 +1,11 @@
+
+public class Patient {
+	public String[] properties = new String[268];
+	
+	public Patient(String s){
+		properties = s.split(" ");
+		for(int i=0; i<properties.length; i++){
+			properties[i].trim();
+		}
+	}
+}

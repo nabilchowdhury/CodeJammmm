@@ -21,24 +21,14 @@ public class Analyzer {
 			}
 			scanner.close();
 			
-			//sets remissions
-			setRemissions();
-			for(int i=0; i<remissions.size(); i++){
-				System.out.println(remissions.get(i).properties[266]);
-			}
-			
-			//System.out.println(patients.get(5).properties[266]);
+			System.out.println(patients.get(5).properties[266]);
 		}catch(Exception e){
 			
 		}
 	}
 	
 	public static void setRemissions(){
-		for(int i=0; i<patients.size(); i++){
-			if(patients.get(i).properties[266].equals("COMPLETE_REMISSION")){
-				remissions.add(patients.get(i));
-			}
-		}
+		
 	}
 	
 	

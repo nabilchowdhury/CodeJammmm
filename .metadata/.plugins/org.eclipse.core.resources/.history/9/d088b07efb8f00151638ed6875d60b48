@@ -1,0 +1,11 @@
+
+public class Patient {
+	public String[] properties = new String[268];
+	
+	public Patient(String s){
+		String[] temp = s.split("\t");
+		for(int i=0; i<temp.length; i++){
+			properties[i] = temp[i];
+		}
+	}
+}

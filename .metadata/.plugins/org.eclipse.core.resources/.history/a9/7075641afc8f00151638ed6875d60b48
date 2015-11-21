@@ -1,0 +1,30 @@
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class Analyzer {
+	
+	static ArrayList<Patient> patients = new ArrayList<Patient>();
+	
+	public static void main(String[] arg){
+		try{
+			File file = new File("trainingData.txt");
+			Scanner scanner = new Scanner(file);
+			
+			String line = scanner.nextLine();
+			
+			while(scanner.hasNext()){
+				line = scanner.nextLine();
+				patients.add(new Patient(line));
+			}
+			
+			scanner.close();
+			
+			System.out.println(patients.get(5).properties[3]);
+		}catch(Exception e){
+			
+		}
+	}
+	
+	
+}
