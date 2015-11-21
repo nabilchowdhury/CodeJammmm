@@ -31,7 +31,6 @@ public class Solution {
 				patients.add(p);
 			}
 			scanner.close();
-			
 			Analyze();
     	}catch(Exception e){
     		System.out.println(e);
@@ -41,23 +40,46 @@ public class Solution {
     
     public static void Analyze(){
     	//Y = { 1/[ σ * sqrt(2π) ] } * e-(x - μ)2/2σ2
-    	Double remVal = 0.0;
-    	Double resVal = 0.0;
-    	
-    	for(int i = 0; i < dataRem.size(); i++)
+    	Double AnalysisVal = 0.0;
+    	for(int j = 0; j < patients.size(); j++)
     	{
-    		Double input;
+    		{
+    			int pos = 0;
+    			for(int i = 0; i < dataRem.size(); i++)
+            	{
+    				if(pos == 0) pos = 2;
+    				if(pos == 4) pos = 12;
+ 
+            		Double input     = Double.valueOf(patients.get(j).properties[pos].propertyValue);
+            		
+            		Double remAvg    = dataRem.get(i).avg.doubleValue();
+            		Double remStd    = dataRem.get(i).std.doubleValue();
+            		Double remHeight = 1/(remStd*Math.sqrt(2*Math.PI))*Math.exp(-(input-remAvg)*(input-remAvg)/(2*remStd*remStd));
+            		
+            		Double resAvg    = dataRes.get(i).avg.doubleValue();
+            		Double resStd    = dataRes.get(i).std.doubleValue();
+            		Double resHeight = 1/(resStd*Math.sqrt(2*Math.PI))*Math.exp(-(input-resAvg)*(input-resAvg)/(2*resStd*resStd));
+            		
+            		Double analysis = remHeight/resHeight;
+            		AnalysisVal += analysis;
+            		
+            		pos++;
+            	}
+            	AnalysisVal /= dataRem.size();
+            	
+            	//train_id_100 RESISTANT 23.23 123.21
+            	if(AnalysisVal > 1.0) 
+            	{
+            		System.out.println(patients.get(j).properties[0] + " COMPLETE_REMISSION" + "0" + "0");
+            	}
+            	else 
+            	{
+            		System.out.println("RESISTANT" + "0" + "0");
+            	}
+        	}
+    		}
     		
-    		Double remAvg    = dataRem.get(i).avg.doubleValue();
-    		Double remStd    = dataRem.get(i).std.doubleValue();
-    		Double remHeight = 1/(remStd*Math.sqrt(2*Math.PI))*Math.exp(-(input-remStd)*(input-remStd)/(2*remStd*remStd));
-    		
-    		Double resAvg    = dataRes.get(i).avg.doubleValue();
-    		Double resStd    = dataRes.get(i).std.doubleValue();
-    		Double resHeight = 1/(resStd*Math.sqrt(2*Math.PI))*Math.exp(-(input-resStd)*(input-resStd)/(2*resStd*resStd));
-    		
-    		if()
-    	}
+    	
     	
     			
     	
