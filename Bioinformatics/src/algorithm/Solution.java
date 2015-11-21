@@ -41,7 +41,8 @@ public class Solution {
     public static void Analyze(){
     	//Y = { 1/[ σ * sqrt(2π) ] } * e-(x - μ)2/2σ2
     	Double AnalysisVal = 0.0;
-    	for(int j = 0; j < patients.size(); j++)
+		int sizeDiff = 0;
+    	for(int j = 1; j < patients.size(); j++)
     	{
     		{
     			int pos = 0;
@@ -50,32 +51,43 @@ public class Solution {
     				if(pos == 0) pos = 2;
     				if(pos == 4) pos = 12;
  
-            		Double input     = Double.valueOf(patients.get(j).properties[pos].propertyValue);
-            		
-            		Double remAvg    = dataRem.get(i).avg.doubleValue();
-            		Double remStd    = dataRem.get(i).std.doubleValue();
-            		Double remHeight = 1/(remStd*Math.sqrt(2*Math.PI))*Math.exp(-(input-remAvg)*(input-remAvg)/(2*remStd*remStd));
-            		
-            		Double resAvg    = dataRes.get(i).avg.doubleValue();
-            		Double resStd    = dataRes.get(i).std.doubleValue();
-            		Double resHeight = 1/(resStd*Math.sqrt(2*Math.PI))*Math.exp(-(input-resAvg)*(input-resAvg)/(2*resStd*resStd));
-            		
-            		Double analysis = remHeight/resHeight;
-            		AnalysisVal += analysis;
+    				String check = patients.get(j).properties[pos].propertyValue;
+    				if(!check.equals("NA"))
+    				{
+                		Double input     = Double.valueOf(patients.get(j).properties[pos].propertyValue);
+                		
+                		Double remAvg    = dataRem.get(i).avg.doubleValue();
+                		Double remStd    = dataRem.get(i).std.doubleValue();
+                		Double remHeight = 1/(remStd*Math.sqrt(2*Math.PI))*Math.exp(-(input-remAvg)*(input-remAvg)/(2*remStd*remStd));
+                		
+                		Double resAvg    = dataRes.get(i).avg.doubleValue();
+                		Double resStd    = dataRes.get(i).std.doubleValue();
+                		Double resHeight = 1/(resStd*Math.sqrt(2*Math.PI))*Math.exp(-(input-resAvg)*(input-resAvg)/(2*resStd*resStd));
+                		
+                		Double analysis = remHeight/resHeight;
+                		System.out.println(AnalysisVal + "\t" + patients.get(j).properties[pos].column + "\t" + j);
+                		
+                		AnalysisVal += analysis;
+    				}
+    				else sizeDiff++;
             		
             		pos++;
             	}
-            	AnalysisVal /= dataRem.size();
+            	AnalysisVal /= (dataRem.size());
+            	//
+            	AnalysisVal *= 0.8;
             	
             	//train_id_100 RESISTANT 23.23 123.21
+            	/*
             	if(AnalysisVal > 1.0) 
             	{
-            		System.out.println(patients.get(j).properties[0] + " COMPLETE_REMISSION" + "0" + "0");
+            		System.out.println(patients.get(j).properties[0].propertyValue + " COMPLETE_REMISSION" + "0" + "0");
             	}
             	else 
             	{
             		System.out.println("RESISTANT" + "0" + "0");
             	}
+            	*/
         	}
     		}
     		
