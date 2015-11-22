@@ -50,14 +50,11 @@ public class Analyzer {
 			//sets remissions & resistant patients
 			setRemissions();
 			setResistant();
-			
+	
 			setAverage();
 			setSTD();
 			
-			//hardcode
-			//add for loop
-			PrintWriter pw = new PrintWriter("insertfile.txt");
-			pw.println("insert form of output here");
+			
 			
 		} catch(FileNotFoundException e) {
 			e.printStackTrace();
