@@ -61,8 +61,6 @@ public class Solution {
 	    	}else{
 	    		System.out.println(patients.get(i).properties[0]+" RESISTANT"+" 0"+" 0");
 	    	}
-	    	remissionChance = 0;
-	    	rejectionChance = 0;
 	    }
     }
        

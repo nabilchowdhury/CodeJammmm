@@ -35,7 +35,7 @@ public class Analyzer {
 			PropertyImport dummy1 = new PropertyImport("dummy");
 			patients.add(new Patient(dummy1.finalprops));
 			
-			File file = new File("trainingDataOG.txt");
+			File file = new File("trainingData.txt");
 			Scanner scanner = new Scanner(file);
 			String line = scanner.nextLine();
 			
@@ -54,7 +54,14 @@ public class Analyzer {
 			setAverage();
 			setSTD();
 			
-			
+			//hardcoding
+			PrintWriter pw = new PrintWriter("resistavg.txt");
+			int index = 0;
+			while(index < resistAverage.size()){
+				pw.println("resistAverage.add(new Average("+resistAverage.get(index).average+","+resistAverage.get(index).index+"));");
+				index++;
+			}
+			pw.close();
 			
 		} catch(FileNotFoundException e) {
 			e.printStackTrace();
@@ -98,7 +105,7 @@ public class Analyzer {
 	//SETS ARRAYLIST "REMISSIONS"
 	public static void setRemissions(){
 		for(int i=1; i<patients.size(); i++){
-			if(patients.get(i).properties[266].propertyValue.equals("COMPLETE_REMISSION")){
+			if(patients.get(i).properties[265].propertyValue.equals("COMPLETE_REMISSION")){
 				remissions.add(patients.get(i));
 			}
 		}

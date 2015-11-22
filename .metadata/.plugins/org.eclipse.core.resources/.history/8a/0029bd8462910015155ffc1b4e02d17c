@@ -35,7 +35,7 @@ public class Analyzer {
 			PropertyImport dummy1 = new PropertyImport("dummy");
 			patients.add(new Patient(dummy1.finalprops));
 			
-			File file = new File("trainingDataOG.txt");
+			File file = new File("trainingData.txt");
 			Scanner scanner = new Scanner(file);
 			String line = scanner.nextLine();
 			
