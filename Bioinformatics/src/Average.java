@@ -7,4 +7,5 @@ public class Average {
 		this.average = a;
 		this.index = i;
 	}
+
 }

@@ -1,6 +1,7 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Scanner;
 
 //there is an error with parsing the txt file (will explain tomorrow).
@@ -49,14 +50,24 @@ public class Analyzer {
 			setResistant();
 	
 			setAverage();
-			
 			setSTD();
+			sortSTDs(remSTD);
+			for(STD std: remSTD){
+				System.out.println(std.toString());
+			}
+			sortSTDs(resistSTD);
+			System.out.print("*********************************************************\n" +
+							 "*********************************************************\n");
+			for(STD std: resistSTD){
+				System.out.println(std.toString());
+			}
+			
 			////////FIXXXXX
-			System.out.println(resistSTD.size());
+		/*	System.out.println(resistSTD.size());
 			for(int i=0; i<resistSTD.size(); i++){
 				System.out.println(resistSTD.get(i).standarddev+" , column:"+resistSTD.get(i).index);
 			}
-		}catch(FileNotFoundException e){
+	*/	}catch(FileNotFoundException e){
 			e.printStackTrace();
 		}
 	}
@@ -85,6 +96,10 @@ public class Analyzer {
 		for(int i=0; i<uniqueValues.size(); i++){
 			yesNo(column, uniqueValues.get(i));
 		}	
+	}
+	//SORTS AVERAGES
+	public static void sortSTDs(ArrayList<STD> STDs){
+		Collections.sort(STDs);
 	}
 	//FINDS AVG OF BINARY PROPERTIES. EDIT TO INCLUDE MORE INPUTS (USE METHOD "PROPERTYELEMENTS")
 	public static void yesNo(int column, String comparator) {
