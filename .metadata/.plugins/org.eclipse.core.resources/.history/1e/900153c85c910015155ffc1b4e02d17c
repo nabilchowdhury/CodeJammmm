@@ -1,6 +1,7 @@
 package algorithm;
 
-
+import Patient;
+import PropertyImport;
 
 import java.io.*;
 import java.util.*;
@@ -17,14 +18,14 @@ public class Solution {
 		
     public static void main(String[] args) {
     	populateAvg();
-    	System.out.println(remAverage.size());
+    	
     	try{
 			PropertyImport dummy1 = new PropertyImport("dummy");
 			patients.add(new Patient(dummy1.finalprops));
 			
 			File file = new File("trainingData.txt");
 			Scanner scanner = new Scanner(file);
-			String line = "";
+			String line = scanner.nextLine();
 			
 			while(scanner.hasNext()){
 				line = scanner.nextLine();
@@ -33,8 +34,6 @@ public class Solution {
 				patients.add(p);
 			}
 			scanner.close();
-			
-			Analyze();
     	}catch(Exception e){
     		System.out.println(e);
     	}
@@ -45,15 +44,13 @@ public class Solution {
     	int remissionChance = 0;
     	int rejectionChance = 0;
 	    for(int i=1; i<patients.size(); i++){
-	    	for(int j=1; i<remAverage.size(); j++){
-	    		if(!(j == 0 ||j == 1 ||j == 4 ||j == 5 ||j == 6 ||j == 7 ||j == 8 ||j == 9 ||j == 10 ||j == 11 ||j == 266)){
-		    		Double remChance = Double.valueOf(patients.get(i).properties[j].propertyValue)-remAverage.get(j).average;
-		    		Double resistChance = Double.valueOf(patients.get(i).properties[j].propertyValue)-resistAverage.get(j).average;
-		    		if(remChance > resistChance){
-		    			remissionChance++;
-		    		}else{
-		    			rejectionChance++;
-		    		}
+	    	for(int j=1; i<patients.get(i).properties.length; j++){	
+	    		Double remChance = Double.valueOf(patients.get(i).properties[j].propertyValue)-remAverage.get(j).average;
+	    		Double resistChance = Double.valueOf(patients.get(i).properties[j].propertyValue)-resistAverage.get(j).average;
+	    		if(remChance > resistChance){
+	    			remissionChance++;
+	    		}else{
+	    			rejectionChance++;
 	    		}
 	    	}
 	    	if(remissionChance>rejectionChance){

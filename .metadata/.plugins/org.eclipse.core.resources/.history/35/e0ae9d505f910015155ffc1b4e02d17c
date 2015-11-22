@@ -17,7 +17,7 @@ public class Solution {
 		
     public static void main(String[] args) {
     	populateAvg();
-    	System.out.println(remAverage.size());
+    	
     	try{
 			PropertyImport dummy1 = new PropertyImport("dummy");
 			patients.add(new Patient(dummy1.finalprops));
