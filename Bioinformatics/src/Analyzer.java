@@ -3,6 +3,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
+import java.io.*;
 
 //there is an error with parsing the txt file (will explain tomorrow).
 //patients.size() = 167 (1 dummy)
@@ -53,38 +54,18 @@ public class Analyzer {
 			setAverage();
 			setSTD();
 			
-			//PLOT FREQUENCIES
-			int column = 1;
-			while(column < patients.get(1).properties.length){
-				if(!(column == 0 || column == 1 || column == 4 || column == 5 || column == 6 || column == 7 || column == 8 || column == 9 || column == 10 || column == 11 || column == 266)){
-					plotFrequencies(column);
-				}
-				column++;
+			//hardcoding
+			PrintWriter pw = new PrintWriter("resistavg.txt");
+			int index = 0;
+			while(index < resistAverage.size()){
+				pw.println("resistAverage.add(new Average("+resistAverage.get(index).average+","+resistAverage.get(index).index+"));");
+				index++;
 			}
+			pw.close();
 			
 		} catch(FileNotFoundException e) {
 			e.printStackTrace();
 		}
-		
-
-/*			sortSTDs(remSTD);
-			for(STD std: remSTD){
-				System.out.println(std.toString());
-			}
-			sortSTDs(resistSTD);
-			System.out.print("*********************************************************\n" +
-							 "*********************************************************\n");
-			for(STD std: resistSTD){
-				System.out.println(std.toString());
-			}
-			
-			
-			System.out.println(resistSTD.size());
-			for(int i=0; i<resistSTD.size(); i++){
-				System.out.println(resistSTD.get(i).standarddev+" , column:"+resistSTD.get(i).index);
-			}
-*/	
-
 	}
 	//PLOTS FREQUENCIES
 	public static void plotFrequencies(int column) {
@@ -252,21 +233,6 @@ public class Analyzer {
 			int column = resistAverage.get(i).index;
 			double std = calculateSTD(column, avgResist, resistant);
 			resistSTD.add(new STD(std, column));
-		}
-	}
-	
-	//Just ignore for now.
-	public static void createNumbsArray(ArrayList<Patient> L, int property) {
-		for(int i = 0; i < L.get(1).properties.length; i++)
-		{
-			String blah = L.get(1).properties[i].propertyValue; 
-			if(blah.contains("0") || blah.contains("1") || blah.contains("2")|| blah.contains("3") || blah.contains("4") || blah.contains("5") || blah.contains("6") || blah.contains("7")|| blah.contains("8") || blah.contains("9"))
-			{
-				for(int j = 1; j < L.size(); j++)
-				{
-					
-				}
-			}
 		}
 	}
 }

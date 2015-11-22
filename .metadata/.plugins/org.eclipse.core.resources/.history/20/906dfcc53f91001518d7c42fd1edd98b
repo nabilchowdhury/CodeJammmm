@@ -1,0 +1,37 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+	
+	public static String[][] patients = new String[1][265];
+
+    public static void main(String[] args) {
+        
+    }
+    
+    public static void importData(File file){
+    	try{
+    		Scanner sc = new Scanner(file);	
+    		String line = sc.nextLine();
+    		line = sc.nextLine();
+    		
+    		int i=0;
+    		while(sc.hasNext()){
+    			String[] lines = line.split("\t");
+    			for(int j=1; j<lines.length; j++){
+    				patients[i][]
+    			}
+    			
+    		}
+    	}catch(Exception e) {
+    		System.out.println(e);
+    	}
+    }
+    
+    
+    
+ 
+}

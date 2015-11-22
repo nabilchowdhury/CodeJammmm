@@ -1,0 +1,39 @@
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+	
+	public static ArrayList<Double> avgRemission;
+		
+    public static void main(String[] args) {
+        
+    }
+    
+    public static void importData(File file){
+    	try{
+    		Scanner sc = new Scanner(file);	
+    		//skips first two lines
+    		String line = sc.nextLine();
+    		line = sc.nextLine();
+    		
+    		int i=0; //counts patient
+    		
+    		//insert while loop,etc.
+    		
+    		
+    		sc.close();
+    	}catch(Exception e) {
+    		System.out.println(e);
+    	}
+    }
+    
+    public static void populateAvg(){
+    	avgRemission.add(index, element);
+    }
+    
+    
+ 
+}
