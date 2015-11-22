@@ -5,6 +5,6 @@ public class Patient {
 	public Patient(Property[] s){	
 		properties = s;
 	}
-	
+
 }
 

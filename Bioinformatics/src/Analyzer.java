@@ -26,7 +26,8 @@ public class Analyzer {
 	static ArrayList<STD> remSTD = new ArrayList<STD>();
 	static ArrayList<STD> resistSTD = new ArrayList<STD>();
 	
-	
+	static double average;
+	static int frequencies;
 	
 	public static void main(String[] args){
 		try{
@@ -51,7 +52,22 @@ public class Analyzer {
 	
 			setAverage();
 			setSTD();
-			sortSTDs(remSTD);
+			
+			//PLOT FREQUENCIES
+			int column = 1;
+			while(column < patients.get(1).properties.length){
+				if(!(column == 0 || column == 1 || column == 4 || column == 5 || column == 6 || column == 7 || column == 8 || column == 9 || column == 10 || column == 11 || column == 266)){
+					plotFrequencies(column);
+				}
+				column++;
+			}
+			
+		} catch(FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+
+/*			sortSTDs(remSTD);
 			for(STD std: remSTD){
 				System.out.println(std.toString());
 			}
@@ -62,16 +78,49 @@ public class Analyzer {
 				System.out.println(std.toString());
 			}
 			
-			////////FIXXXXX
-		/*	System.out.println(resistSTD.size());
+			
+			System.out.println(resistSTD.size());
 			for(int i=0; i<resistSTD.size(); i++){
 				System.out.println(resistSTD.get(i).standarddev+" , column:"+resistSTD.get(i).index);
 			}
-	*/	}catch(FileNotFoundException e){
-			e.printStackTrace();
+*/	
+
+	}
+	//PLOTS FREQUENCIES
+	public static void plotFrequencies(int column) {
+		ArrayList<Property> properties = sortPatient(patients, column);
+		Average a = new Average(calculateAverageInt(column, patients), column);
+		double average = a.average;
+		double rangemax = average/100;
+		int freq = 0;
+		Boolean wasChanged = false;
+		
+		
+		for(int i = 0; i < patients.size(); i++)
+		{
+			double value = Double.valueOf(properties.get(i).propertyValue); 
+			if(value < rangemax)
+			{
+				freq++;
+				wasChanged = true;
+			}
+			if(!wasChanged)
+			{
+				rangemax += average/100;
+				System.out.println(rangemax + "\t" + freq);
+				freq = 0;
+			}
 		}
 	}
-	
+	//SORTS A GIVEN PATIENT LIST BY INCREASING PROPERTY VALUE 
+	public static ArrayList<Property> sortPatient(ArrayList<Patient> patients, int column){
+		ArrayList<Property> properties = new ArrayList<Property>();
+		for(int i=1; i<patients.size(); i++){
+			properties.add(patients.get(i).properties[column]);
+		}
+		Collections.sort(properties);
+		return properties;
+	}
 	//SETS ARRAYLIST "REMISSIONS"
 	public static void setRemissions(){
 		for(int i=1; i<patients.size(); i++){
@@ -140,7 +189,7 @@ public class Analyzer {
 		return result;
 	}
 	
-	//CALCULATES AVERAGE OF INT TABLE DATA
+	//CALCULATES AVERAGE OF INT TABLE DATA - ERROR FOR PATIENTS LIST
 	public static double calculateAverageInt(int column, ArrayList<Patient> p){
 		int patients = p.size();
 		double sum = 0;
@@ -156,6 +205,7 @@ public class Analyzer {
 		
 		return average;
 	}
+	
 	
 	//SETS AVERAGE OF REMISSIONS AND RESISTANTS (INT DATA ONLY)
 	public static void setAverage(){
